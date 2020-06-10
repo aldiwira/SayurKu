@@ -1,13 +1,19 @@
 const express = require("express");
 const app = express();
 const mongooDb = require("./config/mongoose");
+const userRoute = require("./route/users_router");
 const dotenv = require("dotenv/config");
+
+app.use(express.json());
 //Greating Middle
 app.get("/", (req, res) => {
   res.status(200).json({
     name: "Sayur App",
   });
 });
+
+app.use("/users", userRoute);
+
 //run host and port app
 app.listen(process.env.PORT, () => {
   //checking error when connecting database

@@ -4,14 +4,21 @@ module.exports = {
   CODE_ERROR: 400,
   CODE_UNKNOWN: 404,
   set_response: (response, data, massage) => {
-    let status = false;
-    response.code === this.CODE_SUCCESS || response.code === this.CODE_CREATED
-      ? (status = true)
-      : (status = false);
-    return {
-      status: status,
-      massage: massage,
-      data: data,
-    };
+    let status;
+    if (response === 200 || response === 201) {
+      status = true;
+    } else {
+      status = false;
+    }
+    return !data
+      ? {
+          status: status,
+          massage: massage,
+        }
+      : {
+          status: status,
+          massage: massage,
+          data: data,
+        };
   },
 };

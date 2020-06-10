@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 const users = new Mongoose.Schema(
   {
     id_user: {
-      type: Number,
+      type: String,
       required: true,
       default: uniqid.time(),
     },
@@ -40,10 +40,5 @@ const users = new Mongoose.Schema(
     },
   }
 );
-
-users.pre("next", (next) => {
-  this.password = bcrypt.hashSync(this.password, 10);
-  next();
-});
 
 module.exports = Mongoose.model("users", users);
