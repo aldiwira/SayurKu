@@ -1,5 +1,5 @@
-import Mongoose from "mongoose";
-import uniqid from "uniqid";
+const Mongoose = require("mongoose");
+const uniqid = require("uniqid");
 
 const barang = new Mongoose.Schema(
   {

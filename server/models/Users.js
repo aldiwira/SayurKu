@@ -1,7 +1,6 @@
-import Mongoose from "mongoose";
-import uniqid from "uniqid";
-import bcrypt from "bcrypt";
-
+const Mongoose = require("mongoose");
+const uniqid = require("uniqid");
+const bcrypt = require("bcrypt");
 const users = new Mongoose.Schema(
   {
     id_user: {
