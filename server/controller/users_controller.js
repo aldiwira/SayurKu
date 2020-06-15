@@ -1,6 +1,6 @@
-const userModels = require("../models/Users");
-const response = require("../helper/response");
-const bcrypt = require("bcrypt");
+const userModels = require('../models/Users');
+const response = require('../helper/response');
+const bcrypt = require('bcrypt');
 let code;
 let massage;
 let data;
@@ -19,12 +19,15 @@ module.exports = {
       no_telp: req.body.no_telp,
       alamat: req.body.alamat,
     };
-    if (!(await userAvailable(datas))) {
+    const cond = await userAvailable({
+      $or: [{email: datas.email}, {no_telp: datas.no_telp}],
+    });
+    if (!cond) {
       await userModels
         .create(datas)
         .then((result) => {
           code = response.CODE_CREATED;
-          massage = "User account was created";
+          massage = 'User account was created';
           data = result;
         })
         .catch((err) => {
@@ -34,7 +37,7 @@ module.exports = {
         });
     } else {
       code = response.CODE_ERROR;
-      massage = "Users account was available";
+      massage = 'Users account was available';
       data = null;
     }
 
@@ -46,31 +49,31 @@ module.exports = {
       password: req.body.password,
     };
     await userModels
-      .findOne({ email: datas.email })
+      .findOne({email: datas.email})
       .then((result) => {
         if (result) {
           const hashChecker = bcrypt.compareSync(
             datas.password,
-            result.password
+            result.password,
           );
           if (hashChecker) {
             code = response.CODE_SUCCESS;
-            massage = "Login was successfull";
+            massage = 'Login was successfull';
             data = result;
           } else {
             code = response.CODE_ERROR;
-            massage = "Username or password is wrong";
+            massage = 'Username or password is wrong';
             data = null;
           }
         } else {
           code = response.CODE_ERROR;
-          massage = "Username or password is wrong";
+          massage = 'Username or password is wrong';
           data = null;
         }
       })
       .catch((err) => {
         code = response.CODE_ERROR;
-        massage = "Login error";
+        massage = 'Login error';
         data = err;
       });
     res.status(code).json(response.set_response(code, data, massage));
