@@ -1,5 +1,5 @@
-const Mongoose = require("mongoose");
-const uniqid = require("uniqid");
+const Mongoose = require('mongoose');
+const uniqid = require('uniqid');
 
 const detail_transaksi = new Mongoose.Schema(
   {
@@ -23,10 +23,10 @@ const detail_transaksi = new Mongoose.Schema(
   },
   {
     timestamps: {
-      createdAt: "createdAt",
-      updatedAt: "updatedAt",
+      createdAt: 'createdAt',
+      updatedAt: 'updatedAt',
     },
-  }
+  },
 );
 
-module.exports = Mongoose.model("detail transaksi", detail_transaksi);
+module.exports = Mongoose.model('detail transaksi', detail_transaksi);

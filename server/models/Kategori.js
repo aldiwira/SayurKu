@@ -1,24 +1,23 @@
-const Mongoose = require("mongoose");
-const uniqid = require("uniqid");
+const Mongoose = require('mongoose');
+const uniqid = require('uniqid');
 
 const kategori = new Mongoose.Schema(
   {
-    id_kategori: {
-      type: Number,
+    id_katagori: {
+      type: String,
       required: true,
-      default: uniqid.time(),
     },
-    kategori: {
+    nama_katagori: {
       type: String,
       required: true,
     },
   },
   {
     timestamps: {
-      createdAt: "createdAt",
-      updatedAt: "updatedAt",
+      createdAt: 'createdAt',
+      updatedAt: 'updatedAt',
     },
-  }
+  },
 );
 
-module.exports = Mongoose.model("kategori", kategori);
+module.exports = Mongoose.model('kategori', kategori);

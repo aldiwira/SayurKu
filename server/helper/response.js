@@ -1,3 +1,4 @@
+const uniqid = require('uniqid');
 module.exports = {
   CODE_SUCCESS: 200,
   CODE_CREATED: 201,
@@ -20,5 +21,8 @@ module.exports = {
           massage: massage,
           data: data,
         };
+  },
+  getUniqId: () => {
+    return uniqid.time();
   },
 };
